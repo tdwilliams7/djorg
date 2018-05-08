@@ -1,5 +1,10 @@
 <form class="" action="" method="post">
   {% csrf_token %}
-  {{ form }}
+  <h1>Name</h1>
+  {{ form.name }}
+  <h1>url</h1>
+  {{ form.url }}
+  <h1>Notes</h1>
+  {{ form.notes }}
   <input type="submit" value="Submit"  />
 </form>

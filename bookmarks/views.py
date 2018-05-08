@@ -8,6 +8,10 @@ from .forms import BookmarkForm
 
 
 def index(request):
+    if request.method == 'POST':
+        target_id = request.POST['id']
+        target_bookmark = Bookmark.objects.filter(pk=target_id)
+        target_bookmark.delete()
     bookmark_list = Bookmark.objects.all()
     return render(request, 'bookmarks/index.html', {'bookmark_list': bookmark_list})
 
@@ -17,9 +21,7 @@ def add_bookmark(request):
         form = BookmarkForm(request.POST)
         if form.is_valid():
             form = form.cleaned_data
-            print(form)
-            new_bookmark = Bookmark(form['url'], form['name'], form['notes'])
-            new_bookmark.save()
+            Bookmark(form['url'], form['name'], form['notes']).save()
             return HttpResponseRedirect('/bookmarks/')
 
     else:

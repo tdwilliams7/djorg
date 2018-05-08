@@ -14,6 +14,11 @@
           <h5 class="card-title">{{ bookmark.name }}</h5>
           <p class="card-text">{{ bookmark.notes }}</p>
           <a target='_blank' href="{{ bookmark.url }}" class="btn btn-primary">Go somewhere</a>
+          <form method='post'>
+            {% csrf_token %}
+            <input type='hidden' name='id' value="{{ bookmark.id }}"/>
+            <button name='delete' type='submit' class='btn btn-primary'>Delete</button>
+          </form>
         </div>
       </div>
       {% endfor %}
