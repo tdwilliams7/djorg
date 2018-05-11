@@ -22,7 +22,7 @@ def add_bookmark(request):
         if form.is_valid():
             form = form.cleaned_data
             Bookmark(form['url'], form['name'], form['notes']).save()
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect('/')
 
     else:
         form = BookmarkForm()
