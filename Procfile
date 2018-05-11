@@ -1,1 +1,1 @@
-web: gunicorn troy-djorg.wsgi --log-level=info --log-file -
+web: gunicorn https://troy-djorg.herokuapp.com/.wsgi --log-level=info --log-file -
