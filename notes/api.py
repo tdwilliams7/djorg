@@ -4,11 +4,17 @@ from .models import Note
 # Serializers define the API Respresentation
 
 
-class NoteSerializer(serializers.HyperLinkedModelSerializer):
+class NoteSerializer(serializers.HyperlinkedModelSerializer):
     """serializer to define the API Respresentation for Notes"""
     class Meta:
         model = Note
         fields = ('title', 'content')
+
+    def create(self, validated_data):
+        """Override create to associate current user with new note"""
+        user = self.context['request'].user
+        note = Note.objects.create(user=user, **validated_data)
+        return note
 
 
 class NoteViewSet(viewsets.ModelViewSet):
