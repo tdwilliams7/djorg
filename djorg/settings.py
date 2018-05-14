@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #third party apps#
-    #our apps#
-    'bookmarks'
+    # third party apps
+    'rest_framework',
+    # our apps
+    'bookmarks',
+    'notes',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +82,14 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionOrAnonReadOnly'
+    ]
+}
 
 WSGI_APPLICATION = 'djorg.wsgi.application'
 
