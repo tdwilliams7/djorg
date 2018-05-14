@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from django.http import HttpResponseRedirect
@@ -16,6 +17,7 @@ def index(request):
     return render(request, 'bookmarks/index.html', {'bookmark_list': bookmark_list})
 
 
+@login_required
 def add_bookmark(request):
     if request.method == 'POST':
         form = BookmarkForm(request.POST)
