@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -108,7 +109,11 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users
     'DEFAULT_PERMISSIONS_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    )
 }
 
 WSGI_APPLICATION = 'djorg.wsgi.application'

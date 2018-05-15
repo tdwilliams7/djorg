@@ -1,8 +1,9 @@
 from rest_framework import serializers, viewsets
-from .models import Note
+from .models import Note, User
 from django.conf import settings
 from django.conf.urls import url
 from rest_framework.authtoken import views as drf_views
+from django.http import HttpResponse
 
 # Serializers define the API Respresentation
 
@@ -18,6 +19,23 @@ class NoteSerializer(serializers.HyperlinkedModelSerializer):
         user = self.context['request'].user
         note = Note.objects.create(user=user, **validated_data)
         return note
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class meta:
+        model = User
+        fields = ('username')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def retrieve(self, request, pk=None):
+        if pk == 'i':
+            return HttpResponse(UserSerializer(request.user,
+                                               context={'request': request}).data)
+        return super(UserViewSet, self).retrieve(request, pk)
 
 
 class NoteViewSet(viewsets.ModelViewSet):
