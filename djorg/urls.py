@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
+from graphene_django.views import GraphQLView
 from rest_framework import routers
 from notes.api import NoteViewSet
 from rest_framework.authtoken.views import obtain_auth_token
@@ -29,5 +30,6 @@ urlpatterns = [
     path('bookmarks/', include('bookmarks.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
     path(r'obtain-auth-token/', obtain_auth_token)
 ]
