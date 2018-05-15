@@ -31,5 +31,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
-    path(r'obtain-auth-token/', obtain_auth_token)
+    path('obtain-auth-token/', obtain_auth_token)
 ]
